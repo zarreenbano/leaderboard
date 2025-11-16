@@ -12,6 +12,9 @@ import {
   type DocumentData,
   writeBatch,   // ← ADDED
   doc,
+  addDoc,           // ← ADD
+  serverTimestamp,  // ← ADD
+  getDocs,
 } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions";   
 // -------------------------------------------------------------------
@@ -34,10 +37,11 @@ export const db = getFirestore(app);
 // 2. Player Type (id = Firestore doc ID)
 // -------------------------------------------------------------------
 export type Player = {
-  id: string;
+  id?: string;
   name: string;
   score: number;
   rank?: number;
+  timestamp?: any;
 };
 
 // -------------------------------------------------------------------
@@ -66,4 +70,4 @@ export const useLeaderboard = (callback: (players: Player[]) => void) => {
 
   return unsubscribe;
 };
-export { writeBatch, doc };
+export { writeBatch, doc,addDoc,serverTimestamp,getDocs, getFunctions, httpsCallable };
